@@ -35,5 +35,6 @@ https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/latest/install
 2. `cd` into `./src/Ollama.Practice.AppHost/`
 3. `dotnet run`
 4. You'll see a log into the terminal of `Login to the dashboard at https://0.0.0.0:17010/login?t=<token>`, open this url in your browser to access the Aspire Dashboard
+5. Eventually the `crew` job will display `Finished`, at which point you can check out its logs, or you can navigate to `src/Ollama.Practice.Crew/output/<timestamp>/...` to see the various output text files it produced.
 
 
