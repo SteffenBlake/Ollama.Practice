@@ -1,0 +1,6 @@
+qdrant-client
+PyPDF2
+requests
+langchain-text-splitters
+langchain-ollama
+langchain-qdrant

@@ -1,0 +1,5 @@
+qdrant-client
+langchain-ollama
+langchain-qdrant
+langchain
+crewai
