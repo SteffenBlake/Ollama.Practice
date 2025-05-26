@@ -3,3 +3,5 @@ langchain-ollama
 langchain-qdrant
 langchain
 crewai
+crewai-tools
+langchain_community

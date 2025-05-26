@@ -39,11 +39,13 @@
 
   <Message Importance="High" Text="Initializing virtual environments..." />
 
-  <Exec 
-    Command="python -m venv %(PythonProjects.RootDir)%(PythonProjects.Directory)$(PythonVirtualEnvironmentName)/" 
-    Condition="!Exists('%(PythonProjects.RootDir)%(PythonProjects.Directory)$(PythonVirtualEnvironmentName)/')" 
-    WorkingDirectory="%(PythonProjects.RootDir)%(PythonProjects.Directory)" 
-    StandardOutputImportance="Low" />
+    <Exec 
+        Command="python -m venv %(PythonProjects.RootDir)%(PythonProjects.Directory)$(PythonVirtualEnvironmentName)/" 
+        Condition="!Exists('%(PythonProjects.RootDir)%(PythonProjects.Directory)$(PythonVirtualEnvironmentName)/')" 
+        WorkingDirectory="%(PythonProjects.RootDir)%(PythonProjects.Directory)" 
+        StandardOutputImportance="High"
+        StandardErrorImportance="High"
+    />
   </Target>
 
   <Target Name="PipInstall"
@@ -64,17 +66,21 @@
     <PipCmd Condition=" '$(OS)' != 'Windows_NT' ">python -m pip</PipCmd>
   </PropertyGroup>
 
-  <Exec
-    Command='cmd /c "$(PythonVirtualEnvironmentName)\Scripts\activate.bat &amp;&amp; $(PipCmd) install -r %(PythonProjects.Filename)%(PythonProjects.Extension)"'
-    Condition="'$(OS)' == 'Windows_NT'"
-    WorkingDirectory="%(PythonProjects.RootDir)%(PythonProjects.Directory)"
-    StandardOutputImportance="Low" />
+    <Exec
+        Command='cmd /c "$(PythonVirtualEnvironmentName)\Scripts\activate.bat &amp;&amp; $(PipCmd) install -r %(PythonProjects.Filename)%(PythonProjects.Extension)"'
+        Condition="'$(OS)' == 'Windows_NT'"
+        WorkingDirectory="%(PythonProjects.RootDir)%(PythonProjects.Directory)"
+        StandardOutputImportance="High"
+        StandardErrorImportance="High"
+    />
 
-  <Exec
-    Command='/bin/bash -c "source $(PythonVirtualEnvironmentName)/bin/activate &amp;&amp; $(PipCmd) install -r %(PythonProjects.Filename)%(PythonProjects.Extension)"'
-    Condition="'$(OS)' != 'Windows_NT'"
-    WorkingDirectory="%(PythonProjects.RootDir)%(PythonProjects.Directory)"
-    StandardOutputImportance="Low" />
+    <Exec
+        Command='/bin/bash -c "source $(PythonVirtualEnvironmentName)/bin/activate &amp;&amp; $(PipCmd) install -r %(PythonProjects.Filename)%(PythonProjects.Extension)"'
+        Condition="'$(OS)' != 'Windows_NT'"
+        WorkingDirectory="%(PythonProjects.RootDir)%(PythonProjects.Directory)"
+        StandardOutputImportance="High"
+        StandardErrorImportance="High"
+    />
 
   <Touch Files="$(PipInstallSentinelFilePath)" AlwaysCreate="True" />
 

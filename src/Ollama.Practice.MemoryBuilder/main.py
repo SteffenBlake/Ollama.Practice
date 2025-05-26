@@ -5,7 +5,7 @@ from qdrant_client import QdrantClient
 from PyPDF2 import PdfReader
 from langchain_text_splitters import RecursiveCharacterTextSplitter
 from langchain_ollama import OllamaEmbeddings
-from langchain_qdrant import Qdrant
+from langchain_qdrant import QdrantVectorStore
 
 pdf_url = os.getenv("PdfUrl")
 qdrant_conn = os.getenv("ConnectionStrings__qdrant-ollama_http")
@@ -34,16 +34,6 @@ if client.collection_exists(collection_name):
     print("Collection already exists, ending execution.")
     exit(0)
 
-# qdrant_headers = {"api-key": qdrant_key}
-# qdrant_collections_url = f"{qdrant_url}/collections"
-#
-# qdrant_response = requests.get(qdrant_collections_url, headers=qdrant_headers)
-# qdrant_collections = qdrant_response.json().get("result", {}).get("collections", [])
-#
-# if any(c.get("name") == collection_name for c in qdrant_collections):
-#     print("Collection already exists, ending execution.")
-#     exit(0)
-
 print("Downloading pdf...")
 resp = requests.get(pdf_url)
 pdf_bytes = io.BytesIO(resp.content)
@@ -63,7 +53,7 @@ embeddings = OllamaEmbeddings(
 )
 
 print("Uploading chunks to Qdrant...")
-db = Qdrant.from_texts(
+db = QdrantVectorStore.from_texts(
     texts=chunks,
     embedding=embeddings,
     url=qdrant_url,
