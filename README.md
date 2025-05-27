@@ -8,21 +8,23 @@ https://learn.microsoft.com/en-us/windows/wsl/install
 
 **All steps below assume you are doing them inside a linux environment, windows is not actively supported**
 
-### Python 
+### Python 3.12.x (NOT 3.13! It isnt compatible atm due to downstream stuff) 
 Confirm via `python --version`
 https://www.python.org/downloads/
+or
+https://github.com/pyenv/pyenv for better python version management
 
 ### .NET 9
 Confirm via `dotnet --list-sdks`
 https://dotnet.microsoft.com/en-us/download
 
-### Docker
+### Docker v28+ (might work on earlier, but I only have it tested on 28+)
 Confirm via `docker --version`
 https://docs.docker.com/engine/install/
 
-### Nvidia supported GPU
+### Nvidia Cuda 12 supported GPU
 Confirm via `nvidia-smi`
-Check for `CUDA Version: 11` or better
+Check for `CUDA Version: 12.x` or better
 https://www.nvidia.com/en-in/drivers/
 
 ### nvidia-container-toolkit
